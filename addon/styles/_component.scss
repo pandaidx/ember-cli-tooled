@@ -1,0 +1,171 @@
+//
+// Tooled component
+// --------------------------------------------------
+
+
+// Base tooltip
+// -------------------------
+
+.#{$tooltip-css-prefix} {
+	@include tooltip-size($tooltip-medium-padding, $tooltip-medium-radius, $tooltip-medium-arrow);
+	@include tooltip-theme($tooltip-dark-bg, $tooltip-dark-color);
+	position: relative;
+	display: inline-block;
+
+	&:before,
+	&:after {
+		position: absolute;
+		transform: translate3d(0, 0, 0);
+		visibility: hidden;
+		opacity: 0;
+		z-index: $tooltip-zindex;
+		pointer-events: none;
+	}
+
+	&:hover:before,
+	&:hover:after,
+	&:focus:before,
+	&:focus:after {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	// Tooltip arrow
+	&:before {
+		content: '';
+		position: absolute;
+		background: transparent;
+		border: {
+			style: solid;
+			color: transparent;
+		}
+		z-index: $tooltip-zindex + 1;
+	}
+
+	// Tooltip body
+	&:after {
+		content: attr(data-tooled);
+		white-space: nowrap;
+		font-weight: bold;
+	}
+}
+
+
+// Tooltip positioning
+// -------------------------
+
+.#{$tooltip-css-prefix}--top {
+	@include tooltip-vertical('bottom', -1, $tooltip-medium-arrow);
+
+	&.#{$tooltip-css-prefix}--lg {
+		@include tooltip-vertical('bottom', -1, $tooltip-large-arrow);
+	}
+
+	&.#{$tooltip-css-prefix}--sm {
+		@include tooltip-vertical('bottom', -1, $tooltip-small-arrow);
+	}
+}
+
+.#{$tooltip-css-prefix}--bottom {
+	@include tooltip-vertical('top', 1, $tooltip-medium-arrow);
+
+	&.#{$tooltip-css-prefix}--lg {
+		@include tooltip-vertical('top', 1, $tooltip-large-arrow);
+	}
+
+	&.#{$tooltip-css-prefix}--sm {
+		@include tooltip-vertical('top', 1, $tooltip-small-arrow);
+	}
+}
+
+.#{$tooltip-css-prefix}--right {
+	@include tooltip-horizontal('left', 1, $tooltip-medium-arrow);
+
+	&.#{$tooltip-css-prefix}--lg {
+		@include tooltip-horizontal('left', 1, $tooltip-large-arrow);
+	}
+
+	&.#{$tooltip-css-prefix}--sm {
+		@include tooltip-horizontal('left', 1, $tooltip-small-arrow);
+	}
+}
+
+.#{$tooltip-css-prefix}--left {
+	@include tooltip-horizontal('right', -1, $tooltip-medium-arrow);
+
+	&.#{$tooltip-css-prefix}--lg {
+		@include tooltip-horizontal('right', -1, $tooltip-large-arrow);
+	}
+
+	&.#{$tooltip-css-prefix}--sm {
+		@include tooltip-horizontal('right', -1, $tooltip-small-arrow);
+	}
+}
+
+
+// Hover transition
+// -------------------------
+
+.#{$tooltip-css-prefix}--animate {
+	&:before,
+	&:after {
+		transition-delay: 0;
+		transition: 200ms ease-in-out;
+	}
+
+	&:hover {
+		transition-delay: 100ms;
+	}
+}
+
+
+// Always visible
+// -------------------------
+
+.#{$tooltip-css-prefix}--always {
+	&:before,
+	&:after {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&.#{$tooltip-css-prefix}--top {
+		@include tooltip-margin('translateY', -1);
+	}
+
+	&.#{$tooltip-css-prefix}--bottom {
+		@include tooltip-margin('translateY', 1);
+	}
+
+	&.#{$tooltip-css-prefix}--left {
+		@include tooltip-margin('translateX', -1);
+	}
+
+	&.#{$tooltip-css-prefix}--right {
+		@include tooltip-margin('translateX', 1);
+	}
+}
+
+
+// Tooltip sizing
+// -------------------------
+
+.#{$tooltip-css-prefix}--lg {
+	@include tooltip-size($tooltip-large-padding, $tooltip-large-radius, $tooltip-large-arrow);
+}
+
+.#{$tooltip-css-prefix}--sm {
+	@include tooltip-size($tooltip-small-padding, $tooltip-small-radius, $tooltip-small-arrow);
+}
+
+
+// Tooltip themes
+// -------------------------
+
+.#{$tooltip-css-prefix}--dark {
+	@include tooltip-theme($tooltip-dark-bg, $tooltip-dark-color);
+}
+
+.#{$tooltip-css-prefix}--light {
+	@include tooltip-theme($tooltip-light-bg, $tooltip-light-color);
+}

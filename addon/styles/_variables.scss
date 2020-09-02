@@ -1,0 +1,42 @@
+//
+// Tooled variables
+// --------------------------------------------------
+
+
+// Base
+// -------------------------
+
+$tooltip-css-prefix:                       "c-tooltip" !default;
+
+$tooltip-zindex:                           1060 !default;
+
+
+// Units
+// -------------------------
+
+// Small
+$tooltip-small-radius:                     3px !default;
+$tooltip-small-padding:                    3px 7px !default;
+$tooltip-small-arrow:                      $tooltip-small-radius !default;
+
+// Medium
+$tooltip-medium-radius:                    4px !default;
+$tooltip-medium-padding:                   6px 10px !default;
+$tooltip-medium-arrow:                     $tooltip-medium-radius !default;
+
+// Large
+$tooltip-large-radius:                     5px !default;
+$tooltip-large-padding:                    9px 13px !default;
+$tooltip-large-arrow:                      $tooltip-large-radius !default;
+
+
+// Themes
+// -------------------------
+
+// Dark
+$tooltip-dark-color:                       #fff !default;
+$tooltip-dark-bg:                          rgba(#000,.75) !default;
+
+// Light
+$tooltip-light-color:                      #222 !default;
+$tooltip-light-bg:                         rgba(#fff,.75) !default;

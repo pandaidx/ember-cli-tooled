@@ -1,0 +1,82 @@
+//
+// Tooled mixins
+// --------------------------------------------------
+
+
+@mixin tooltip-size($padding, $border-radius, $arrow-size) {
+	&:before {
+		border-width: $arrow-size;
+	}
+
+	&:after {
+		padding: $padding;
+		border-radius: $border-radius;
+	}
+}
+
+@mixin tooltip-theme($tooltip-bg, $tooltip-color) {
+	@include tooltip-arrow-color($tooltip-bg);
+
+	&:after {
+		background-color: $tooltip-bg;
+		color: $tooltip-color;
+	}
+}
+
+// Generates border-color for arrow
+@mixin tooltip-arrow-color($color) {
+	@each $position in top, bottom, left, right {
+		&.#{$tooltip-css-prefix}--#{$position}:before {
+			border-#{$position}-color: $color;
+		}
+	}
+}
+
+// Position for vertical tooltips
+@mixin tooltip-vertical($property-y, $transition-direction, $arrow-size) {
+	&:before {
+		margin-#{$property-y}: -2 * $arrow-size;
+	}
+
+	&:before, &:after {
+		#{$property-y}: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	&:hover, &:focus {
+		@include tooltip-margin('translateY', $transition-direction);
+	}
+}
+
+// Position for horizontal tooltips
+@mixin tooltip-horizontal($property-x, $transition-direction, $arrow-size) {
+	&:before {
+		margin-#{$property-x}: -2 * $arrow-size;
+	}
+
+	&:before, &:after {
+		#{$property-x}: 100%;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&:hover, &:focus {
+		@include tooltip-margin('translateX', $transition-direction);
+	}
+}
+
+// Set margin on tooltip using translate transform
+@mixin tooltip-margin($property, $transition-direction) {
+	$value: (#{8px * $transition-direction});
+
+	@if $property == 'translateY' {
+		&:after, &:before {
+			transform: translate(-50%, $value);
+		}
+	} @else {
+		&:after, &:before {
+			transform: translate($value, -50%);
+		}
+	}
+}
